@@ -8,38 +8,53 @@
   </head>
   <body>
     <main class="panel">
+      <!-- Sezione della card con l’input -->
       <section class="card" style="text-align:center;">
         <p>Per leggere il bigliettino che ti ho scritto <br>devi inserire il numero civico dela casa della <br>famiglia Toretto.</p>
-        <input type="text" id="codeInput" style="max-width:260px;">
+        <!-- input migliorato: solo cifre, max 4, stile via CSS -->
+        <input
+          type="text"
+          id="codeInput"
+          class="code-input"
+          inputmode="numeric"
+          pattern="[0-9]*"
+          maxlength="4"
+          aria-label="Numero segreto"
+        />
         <div style="margin-top:12px;">
           <button id="unlockBtn" class="cta-btn">Apri bigliettino</button>
         </div>
-        <p id="errorMsg" style="color:#a55; min-height:20px;"></p>
+        <p id="errorMsg" style="color:#a55;"></p>
         <p style="text-align: left;">
           <a href="index.html" class="back-link">← Torna alla torta</a>
         </p>
       </section>
+      
+      <script>
+        const PASSCODE = "1327";
+        const input = document.getElementById('codeInput');
+        const btn = document.getElementById('unlockBtn');
+        const errorMsg = document.getElementById('errorMsg');
+      
+        // Consenti solo cifre e max 4, pulisci eventuale errore mentre digiti
+        input.addEventListener('input', () => {
+          input.value = input.value.replace(/\D/g, '').slice(0, 4);
+          input.classList.remove('error');
+          errorMsg.textContent = '';
+        });
+        // Invio sblocca
+        input.addEventListener('keydown', (e) => { if (e.key === 'Enter') btn.click(); });
+      
+        btn.addEventListener('click', () => {
+          const val = (input.value || "").trim();
+          if (val === PASSCODE) {
+            location.href = "bigliettino.html?code=" + PASSCODE;
+          } else {
+            input.classList.add('error');
+            errorMsg.textContent = "Non ci siamo proprio!!";
+          }
+        });
+      </script>
     </main>
-
-    <script>
-      const PASSCODE = "1327";
-      const input = document.getElementById('codeInput');
-      const btn = document.getElementById('unlockBtn');
-      const errorMsg = document.getElementById('errorMsg');
-
-      // Messaggio errore da redirect
-      const err = new URLSearchParams(location.search).get('err');
-      if (err) errorMsg.textContent = "Inserisci il numero corretto per accedere.";
-
-      btn.addEventListener('click', () => {
-        const val = (input.value || "").trim();
-        if (val === PASSCODE) {
-          // passa il codice via query per validazione sulla pagina del bigliettino
-          location.href = "bigliettino.html?code=" + PASSCODE;
-        } else {
-          errorMsg.textContent = "Numero errato. Riprova.";
-        }
-      });
-    </script>
   </body>
 </html>
