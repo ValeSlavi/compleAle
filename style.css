@@ -333,3 +333,125 @@ body {
   70%  { transform: translateX(-50%) translateY(10px);   opacity: 1; }
   100% { transform: translateX(-50%) translateY(0);      opacity: 1; }
 }
+
+/* Pulsante sotto la torta */
+.actions {
+  margin-top: 18px;
+  display: grid;
+  place-items: center;
+}
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #6c8dff 0%, #597af3 100%);
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+  opacity: 1; /* niente animazione di ingresso */
+  transition: transform 150ms ease, box-shadow 150ms ease, filter 150ms ease;
+}
+.cta-btn:hover {
+  filter: brightness(1.05);
+  box-shadow: 0 12px 26px rgba(0,0,0,0.16);
+}
+.cta-btn:active {
+  transform: translateY(1px) scale(0.99);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+}
+.cta-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(105,138,255,0.35), 0 12px 26px rgba(0,0,0,0.16);
+}
+.cta-btn:hover { background: #597af3; }
+
+/* Stili per la pagina del bigliettino */
+.card {
+  max-width: 720px;
+  margin: 32px auto;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+}
+.card h2 {
+  margin: 0 0 12px;
+  color: #2f2f2f;
+}
+.card .preview {
+  margin-top: 12px;
+  padding: 16px;
+  border-radius: 12px;
+  background: #f7fbff;
+  color: #5a4b4b;
+}
+.card textarea {
+  width: 100%;
+  min-height: 160px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  resize: vertical;
+  font-size: 18px;
+  line-height: 1.6;
+  font-family: inherit;
+  background: #f1f7ff;
+}
+.back-link {
+  display: inline-block;
+  margin: 8px 0 0;
+  color: #597af3;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* Overlay di accesso */
+.lock-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  background: rgba(189, 224, 254, 0.95); /* azzurrino traslucido */
+}
+.lock-card {
+  width: 320px;
+  max-width: 92vw;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+  text-align: center;
+}
+.lock-card h3 { margin: 0 0 12px; color: #2f2f2f; }
+.lock-card input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 18px;
+  border-radius: 12px;
+  border: 1px solid #d0d8ea;
+  background: #f1f7ff;
+  outline: none;
+  margin-bottom: 12px;
+}
+.gate-msg { margin: 8px 0 0; color: #a55; min-height: 20px; }
+
+/* Riutilizza lo stile del bottone esistente */
+.cta-btn { /* già definita in pagina della torta */ }
+
+/* Utility e animazioni */
+.hidden { display: none; }
+.fade-out { animation: fadeOut 280ms ease forwards; }
+@keyframes fadeOut { to { opacity: 0; transform: scale(0.98); } }
+.shake { animation: shake 280ms ease; }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  50% { transform: translateX(6px); }
+  75% { transform: translateX(-4px); }
+}

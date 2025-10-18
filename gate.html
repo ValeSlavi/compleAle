@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Accesso Bigliettino</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="panel">
+      <section class="card" style="text-align:center;">
+        <p>Per leggere il bigliettino che ti ho scritto <br>devi inserire il numero civico dela casa della <br>famiglia Toretto.</p>
+        <input type="text" id="codeInput" style="max-width:260px;">
+        <div style="margin-top:12px;">
+          <button id="unlockBtn" class="cta-btn">Apri bigliettino</button>
+        </div>
+        <p id="errorMsg" style="color:#a55; min-height:20px;"></p>
+        <p style="text-align: left;">
+          <a href="index.html" class="back-link">← Torna alla torta</a>
+        </p>
+      </section>
+    </main>
+
+    <script>
+      const PASSCODE = "1327";
+      const input = document.getElementById('codeInput');
+      const btn = document.getElementById('unlockBtn');
+      const errorMsg = document.getElementById('errorMsg');
+
+      // Messaggio errore da redirect
+      const err = new URLSearchParams(location.search).get('err');
+      if (err) errorMsg.textContent = "Inserisci il numero corretto per accedere.";
+
+      btn.addEventListener('click', () => {
+        const val = (input.value || "").trim();
+        if (val === PASSCODE) {
+          // passa il codice via query per validazione sulla pagina del bigliettino
+          location.href = "bigliettino.html?code=" + PASSCODE;
+        } else {
+          errorMsg.textContent = "Numero errato. Riprova.";
+        }
+      });
+    </script>
+  </body>
+</html>
