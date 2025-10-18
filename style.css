@@ -297,29 +297,27 @@ body {
   0%, 100% { filter: brightness(1); transform: translateX(-50%) scale(1); }
   50% { filter: brightness(1.25); transform: translateX(-50%) scale(1.15); }
 }
-
-/* CORIANDOLI - overlay su tutta la pagina, sopra al titolo */
+/* CORIANDOLI - overlay su tutta la pagina */
 .confetti {
-  position: fixed;    /* non più limitato al pannello */
+  position: fixed;
   inset: 0;
-  z-index: 999;       /* davanti al titolo */
+  z-index: 999;
   pointer-events: none;
   overflow: hidden;
 }
 .confetti .piece {
   position: absolute;
-  top: -10vh;                 /* nasce già fuori dal viewport */
+  top: -10vh;
   width: 8px;
   height: 14px;
   border-radius: 2px;
   opacity: 0.95;
   will-change: transform;
-  transform: translateY(-35vh); /* default alto; JS lo rende ancora più alto */
+  transform: translateY(-35vh);
   animation-name: confetti-fall;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
 }
-/* cade oltre il fondo per una caduta più lunga */
 @keyframes confetti-fall {
   to { transform: translateY(130vh) rotate(720deg); }
 }
@@ -341,6 +339,7 @@ body {
   place-items: center;
 }
 .cta-btn {
+  border: none;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -364,6 +363,7 @@ body {
   box-shadow: 0 8px 18px rgba(0,0,0,0.12);
 }
 .cta-btn:focus-visible {
+  /* mantiene solo il focus ring morbido già definito */
   outline: none;
   box-shadow: 0 0 0 3px rgba(105,138,255,0.35), 0 12px 26px rgba(0,0,0,0.16);
 }
@@ -440,9 +440,6 @@ body {
   margin-bottom: 12px;
 }
 .gate-msg { margin: 8px 0 0; color: #a55; min-height: 20px; }
-
-/* Riutilizza lo stile del bottone esistente */
-.cta-btn { /* già definita in pagina della torta */ }
 
 /* Utility e animazioni */
 .hidden { display: none; }
