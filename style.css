@@ -1,5 +1,5 @@
 :root {
-  --panel: #bde0fe;
+  --panel: #bde0fe; /* azzurro pastello */
   --cake-1: #a67e5c;
   --cake-2: #b78f6e;
   --cake-3: #c79a79;
@@ -14,19 +14,25 @@
 
 * { box-sizing: border-box; }
 
+html {
+  background: var(--panel); /* assicura niente fascia nera fuori dal body */
+}
+
+/* Body senza gradient scuro */
 body {
   margin: 0;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-  background: linear-gradient(#111 0 140px, var(--panel) 140px 100%);
+  background: var(--panel); /* rimuove la fascia nera in alto */
   color: var(--text);
 }
 
-/* Header scuro come nel layout dell’immagine */
+/* Header sullo stesso azzurro */
 .title {
   height: 140px;
   display: grid;
   place-items: center;
-  color: #fff;
+  background: var(--panel); /* niente fascia scura dietro al titolo */
+  color: #2f2f2f;           /* testo leggibile su azzurro */
 }
 .title h1 {
   margin: 0;
@@ -37,7 +43,7 @@ body {
 /* Pannello rosa con torta centrata */
 .panel {
   min-height: 430px;
-  background: var(--panel);
+  background: var(--panel); /* rimuove il gradient nero in testa */
   display: grid;
   place-items: center;
   padding: 40px 20px;
@@ -292,23 +298,30 @@ body {
   50% { filter: brightness(1.25); transform: translateX(-50%) scale(1.15); }
 }
 
-/* CORIANDOLI */
-.confetti { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+/* CORIANDOLI - overlay su tutta la pagina, sopra al titolo */
+.confetti {
+  position: fixed;    /* non più limitato al pannello */
+  inset: 0;
+  z-index: 999;       /* davanti al titolo */
+  pointer-events: none;
+  overflow: hidden;
+}
 .confetti .piece {
   position: absolute;
-  top: -12px;
+  top: -10vh;                 /* nasce già fuori dal viewport */
   width: 8px;
   height: 14px;
   border-radius: 2px;
   opacity: 0.95;
   will-change: transform;
-  transform: translateY(-12px);
+  transform: translateY(-35vh); /* default alto; JS lo rende ancora più alto */
   animation-name: confetti-fall;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
 }
+/* cade oltre il fondo per una caduta più lunga */
 @keyframes confetti-fall {
-  to { transform: translateY(110vh) rotate(720deg); }
+  to { transform: translateY(130vh) rotate(720deg); }
 }
 @keyframes drop-in {
   0%   { transform: translateY(-320px); opacity: 0; }

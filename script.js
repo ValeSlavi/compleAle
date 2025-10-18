@@ -23,11 +23,15 @@ function startConfetti() {
     el.className = "piece";
     el.style.left = Math.random() * 100 + "vw";
     el.style.background = colors[Math.floor(Math.random() * colors.length)];
-    el.style.animationDuration = 2.5 + Math.random() * 2 + "s";
+    el.style.animationDuration = 3.5 + Math.random() * 3 + "s"; // un po’ più lunga
     el.style.animationDelay = Math.random() * 0.8 + "s";
     el.style.width = 6 + Math.floor(Math.random() * 6) + "px";
     el.style.height = 10 + Math.floor(Math.random() * 10) + "px";
-    el.style.transform = `translateY(-12px) rotate(${Math.random() * 180 - 90}deg)`;
+
+    // ORIGINE SOPRA IL TITOLO (molto sopra il top del viewport)
+    const startY = -(25 + Math.random() * 40) + "vh";
+    el.style.transform = `translateY(${startY}) rotate(${Math.random() * 180 - 90}deg)`;
+
     root.appendChild(el);
   }
   // pulizia automatica
