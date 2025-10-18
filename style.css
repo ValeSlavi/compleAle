@@ -6,7 +6,7 @@
   --icing: #ffffff;
   --plate: #ffffff;
   --shadow: rgba(0, 0, 0, 0.15);
-  --text: #815c5c;
+  --text: #000000;
   --glow: #ffd45a;
   /* nuova curva bounce */
   --ease-bounce: cubic-bezier(.22, 1, .36, 1);
