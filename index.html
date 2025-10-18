@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Torta di compleanno animata</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="title">
+      <h1>Animated Birthday Cake</h1>
+    </header>
+
+    <main class="panel">
+      <div class="cake" aria-label="Birthday cake">
+        <div class="plate"></div>
+
+        <div class="layer layer1"></div>
+        <div class="layer layer2"></div>
+        <div class="layer layer3"></div>
+
+        <div class="icing">
+          <span class="drip d1"></span>
+          <span class="drip d2"></span>
+          <span class="drip d3"></span>
+        </div>
+
+        <div class="candle">
+          <div class="wax"></div>
+          <div class="flame"></div>
+          <!-- fumo della candela -->
+          <div class="smoke" aria-hidden="true"><span></span><span></span><span></span></div>
+        </div>
+      </div>
+
+      <!-- coriandoli (overlay) -->
+      <div class="confetti" id="confetti" aria-hidden="true"></div>
+
+      <div class="wish">
+        <p class="message">Happy birthday Ale!</p>
+      </div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,322 @@
+:root {
+  --panel: #bde0fe;
+  --cake-1: #a67e5c;
+  --cake-2: #b78f6e;
+  --cake-3: #c79a79;
+  --icing: #ffffff;
+  --plate: #ffffff;
+  --shadow: rgba(0, 0, 0, 0.15);
+  --text: #815c5c;
+  --glow: #ffd45a;
+  /* nuova curva bounce */
+  --ease-bounce: cubic-bezier(.22, 1, .36, 1);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  background: linear-gradient(#111 0 140px, var(--panel) 140px 100%);
+  color: var(--text);
+}
+
+/* Header scuro come nel layout dell’immagine */
+.title {
+  height: 140px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+}
+.title h1 {
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Pannello rosa con torta centrata */
+.panel {
+  min-height: 430px;
+  background: var(--panel);
+  display: grid;
+  place-items: center;
+  padding: 40px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Torta */
+.cake {
+  position: relative;
+  width: 260px;
+  height: 210px;
+  opacity: 0;
+  transform: translateY(28px) scale(0.98);
+  animation: cake-in 800ms ease-out 200ms forwards;
+}
+@keyframes cake-in {
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Piattino */
+.plate {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  width: 220px;
+  height: 8px;
+  transform: translateX(-50%);
+  background: var(--plate);
+  border-radius: 30px;
+  box-shadow: 0 6px 0 0 rgba(0,0,0,0.06), 0 12px 18px var(--shadow);
+  z-index: 1;
+}
+
+/* Strati della torta */
+.layer {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  border-radius: 14px;
+  box-shadow: 0 3px 0 rgba(0,0,0,0.06);
+  z-index: 2;
+}
+.layer1 {
+  bottom: 36px;
+  height: 36px;
+  background: linear-gradient(var(--cake-1), #9b7151);
+  opacity: 0;
+  transform: translateX(-50%) translateY(-340px);
+  animation: drop-in-50 650ms var(--ease-bounce) 320ms forwards;
+}
+.layer2 {
+  bottom: 74px;
+  height: 32px;
+  background: linear-gradient(var(--cake-2), #ad805b);
+  opacity: 0;
+  transform: translateX(-50%) translateY(-340px);
+  animation: drop-in-50 650ms var(--ease-bounce) 450ms forwards;
+}
+.layer3 {
+  bottom: 108px;
+  height: 28px;
+  background: linear-gradient(var(--cake-3), #bd8b66);
+  opacity: 0;
+  transform: translateX(-50%) translateY(-340px);
+  animation: drop-in-50 650ms var(--ease-bounce) 580ms forwards;
+}
+
+/* Glassa e colatine */
+.icing {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 136px;
+  width: 208px;
+  height: 30px;
+  background: var(--icing);
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+  animation: icing-drop 900ms ease-out 600ms forwards;
+  clip-path: inset(0 round 16px);
+  z-index: 3;
+}
+@keyframes icing-drop {
+  0% { transform: translateX(-50%) translateY(-16px); opacity: 0; }
+  100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+}
+
+.drip {
+  position: absolute;
+  bottom: -18px;
+  width: 18px;
+  height: 0;
+  background: var(--icing);
+  border-radius: 10px;
+  --h: 28px;
+  animation: drip 900ms ease-out 800ms forwards;
+}
+.d1 { left: 26px;  --h: 28px; }
+.d2 { left: 96px;  --h: 36px; }
+.d3 { left: 154px; --h: 22px; }
+
+@keyframes drip {
+  0% { height: 0; }
+  60% { height: var(--h); }
+  80% { height: calc(var(--h) - 4px); }
+  100% { height: var(--h); }
+}
+
+/* Candela e fiamma */
+.candle {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 168px;
+  width: 12px;
+  height: 60px;
+  z-index: 4;
+}
+
+.wax {
+  position: absolute;
+  bottom: 0;
+  width: 12px;
+  height: 56px;
+  border-radius: 6px;
+  background: repeating-linear-gradient(
+    to bottom,
+    #fff, #fff 8px,
+    #f3f3f3 8px, #f3f3f3 16px
+  );
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  opacity: 0;
+  transform: translateY(10px);
+  animation: candle-in 450ms ease-out 600ms forwards;
+}
+@keyframes candle-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.flame {
+  position: absolute;
+  left: 50%;
+  bottom: 56px;
+  width: 18px;
+  height: 26px;
+  transform: translateX(-50%);
+  transform-origin: center bottom;
+  opacity: 0;
+  border-radius: 50% 50% 50% 50% / 65% 65% 35% 35%;
+  background:
+    radial-gradient(closest-side, #ffe9a3 0%, #ffd66b 50%, #ffb43e 70%, rgba(255,182,72,0) 72%);
+  filter: drop-shadow(0 0 10px var(--glow)) blur(0.2px);
+  animation:
+    flame-on 400ms ease-out 1000ms forwards,
+    flicker 1000ms ease-in-out 1400ms infinite;
+}
+.flame::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -32px;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 90px;
+  background: radial-gradient(closest-side, rgba(255,212,90,0.35), transparent 70%);
+  pointer-events: none;
+}
+@keyframes flame-on { to { opacity: 1; } }
+@keyframes flicker {
+  0%   { transform: translateX(-50%) scale(1) translateY(0) rotate(-2deg); }
+  25%  { transform: translateX(-50%) scale(1.03) translateY(-1px) rotate(-4deg); }
+  50%  { transform: translateX(-50%) scale(0.97) translateY(1px) rotate(2deg); }
+  75%  { transform: translateX(-50%) scale(1.05) translateY(-1px) rotate(-1deg); }
+  100% { transform: translateX(-50%) scale(1) translateY(0) rotate(0deg); }
+}
+
+/* Messaggi */
+.wish {
+  text-align: center;
+  margin-top: 24px;
+  user-select: none;
+}
+.message {
+  margin: 0 0 8px;
+  font-size: 24px;
+  color: #8c6a6a;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: text-in 600ms ease-out 1600ms forwards;
+}
+.name {
+  margin: 0;
+  font-style: italic;
+  font-size: 18px;
+  color: #8c6a6a;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: text-in 600ms ease-out 1900ms forwards;
+}
+@keyframes text-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* FUMO DELLA CANDELA */
+.smoke {
+  position: absolute;
+  left: 50%;
+  bottom: 190px;
+  width: 1px; height: 1px;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.smoke span {
+  position: absolute;
+  left: 50%;
+  width: 12px; height: 12px;
+  transform: translateX(-50%) translateY(0) scale(.8);
+  background: radial-gradient(closest-side, rgba(200,200,200,.25), rgba(200,200,200,0) 70%);
+  filter: blur(1.5px);
+  animation: smoke 4s ease-out infinite;
+  opacity: 0;
+}
+.smoke span:nth-child(1) { animation-delay: 1800ms; }
+.smoke span:nth-child(2) { animation-delay: 2200ms; left: calc(50% - 8px); }
+.smoke span:nth-child(3) { animation-delay: 2600ms; left: calc(50% + 6px); }
+
+@keyframes smoke {
+  0% { transform: translateX(-50%) translateY(0) scale(.8); opacity: 0; }
+  20% { opacity: .5; }
+  100% { transform: translateX(-50%) translateY(-60px) scale(1.4); opacity: 0; }
+}
+
+/* SCINTILLE ATTORNO ALLA FIAMMA */
+.flame::before {
+  content: "";
+  position: absolute;
+  left: 50%; bottom: 36px;
+  transform: translateX(-50%);
+  width: 2px; height: 2px;
+  background: transparent;
+  box-shadow:
+    -24px -20px 0 1px rgba(255,212,90,.4),
+     26px -28px 0 1px rgba(255,212,90,.3),
+     -10px -32px 0 1px rgba(255,212,90,.35),
+      14px -18px 0 1px rgba(255,212,90,.25);
+  animation: sparkle 2.4s ease-in-out 1800ms infinite;
+}
+@keyframes sparkle {
+  0%, 100% { filter: brightness(1); transform: translateX(-50%) scale(1); }
+  50% { filter: brightness(1.25); transform: translateX(-50%) scale(1.15); }
+}
+
+/* CORIANDOLI */
+.confetti { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.confetti .piece {
+  position: absolute;
+  top: -12px;
+  width: 8px;
+  height: 14px;
+  border-radius: 2px;
+  opacity: 0.95;
+  will-change: transform;
+  transform: translateY(-12px);
+  animation-name: confetti-fall;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+@keyframes confetti-fall {
+  to { transform: translateY(110vh) rotate(720deg); }
+}
+@keyframes drop-in {
+  0%   { transform: translateY(-320px); opacity: 0; }
+  70%  { transform: translateY(10px);  opacity: 1; }
+  100% { transform: translateY(0);     opacity: 1; }
+}
+@keyframes drop-in-50 {
+  0%   { transform: translateX(-50%) translateY(-320px); opacity: 0; }
+  70%  { transform: translateX(-50%) translateY(10px);   opacity: 1; }
+  100% { transform: translateX(-50%) translateY(0);      opacity: 1; }
+}
