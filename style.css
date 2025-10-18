@@ -28,7 +28,7 @@ body {
 
 /* Header sullo stesso azzurro */
 .title {
-  height: 140px;
+  height: 100px;
   display: grid;
   place-items: center;
   background: var(--panel); /* niente fascia scura dietro al titolo */
@@ -46,7 +46,6 @@ body {
   background: var(--panel); /* rimuove il gradient nero in testa */
   display: grid;
   place-items: center;
-  padding: 40px 20px;
   position: relative;
   overflow: hidden;
 }
@@ -309,7 +308,7 @@ body {
   position: absolute;
   top: -10vh;
   width: 8px;
-  height: 14px;
+  height: 14  px;
   border-radius: 2px;
   opacity: 0.95;
   will-change: transform;
